@@ -159,6 +159,32 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;; Load Xresources colors
+(load-theme 'xresources t)
+
+;; Set transperancy in emacs
+(defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(85 . 50) '(100 . 100)))))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+
+;; Re-map transposing lines
+(global-unset-key "\C-x\C-t")
+(global-set-key (kbd "C-l") 'transpose-lines)
+
+;; Re-map backward-kill-word
+(global-unset-key "\M-Del")
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
+;; Re-map C-x left/right
 
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
