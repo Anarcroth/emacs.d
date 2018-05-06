@@ -145,7 +145,6 @@
   (setq-default uptimes-keep-count 200)
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
-
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
@@ -173,18 +172,98 @@
                     ;; Also handle undocumented (<active> <inactive>) form.
                     ((numberp (cadr alpha)) (cadr alpha)))
               100)
-         '(85 . 50) '(100 . 100)))))
+         '(80 . 50) '(100 . 100)))))
 (global-set-key (kbd "C-c t") 'toggle-transparency)
 
-;; Re-map transposing lines
-(global-unset-key "\C-x\C-t")
-(global-set-key (kbd "C-l") 'transpose-lines)
+;; Set line numbers
+(global-linum-mode t)
 
-;; Re-map backward-kill-word
-(global-unset-key "\M-Del")
-(global-set-key (kbd "C-w") 'backward-kill-word)
+(custom-set-variables
+ '(c-default-style
+   (quote
+    ((other . "stroustrup")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
+ '(sh-basic-offset 2)
+ '(sh-indentation 2)
+ '(smie-indent-basic 2)
+ '(org-agenda-files (quote ("~/todo.org")))
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)")))))
 
-;; Re-map C-x left/right
+;; re-map backward-kill-word
+(global-set-key (kbd "C-q") 'backward-kill-word)
+
+;;todo
+;; custom welcoming screen
+
+;; duck duck go fix
+
+;; org agenda
+
+;; emai
+
+;; slack
+
+(setq winum-keymap
+      (let ((map (make-sparse-keymap)))
+        (define-key map (kbd "C-`") 'winum-select-window-by-number)
+        (define-key map (kbd "C-²") 'winum-select-window-by-number)
+        (define-key map (kbd "M-0") 'winum-select-window-0-or-10)
+        (define-key map (kbd "M-1") 'winum-select-window-1)
+        (define-key map (kbd "M-2") 'winum-select-window-2)
+        (define-key map (kbd "M-3") 'winum-select-window-3)
+        (define-key map (kbd "M-4") 'winum-select-window-4)
+        (define-key map (kbd "M-5") 'winum-select-window-5)
+        (define-key map (kbd "M-6") 'winum-select-window-6)
+        (define-key map (kbd "M-7") 'winum-select-window-7)
+        (define-key map (kbd "M-8") 'winum-select-window-8)
+        map))
+(require 'winum)
+(winum-mode)
+
+(global-visual-line-mode t)
+
+(setq sentence-end-double-space nil)
+(setq-default cursor-type '(bar . 2))
+
+(require 'telephone-line)
+(setq telephone-line-lhs
+      '(
+        (accent . (telephone-line-vc-segment
+                   telephone-line-erc-modified-channels-segment
+                   telephone-line-process-segment))
+        (nil    . (telephone-line-buffer-segment))))
+(setq telephone-line-rhs
+      '((nil    . (telephone-line-misc-info-segment))
+        (accent . (telephone-line-major-mode-segment))
+        (evil   . (telephone-line-airline-position-segment))))
+(telephone-line-mode 1)
+
+;;(add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
+;;(require 'powerline)
+;;(require 'cl)
+;;
+;;(powerline-default-theme)
+;;(setq powerline-arrow-shape 'arrow)
+;;
+;;;;(custom-set-faces
+;;;; '(mode-line ((t (:foreground "#0c91b4" :background "#d5d4d5" :box nil))))
+;;;; '(mode-line-inactive ((t (:foreground "#96a2a9" :background "#030514" :box nil)))))
+;;
+;;(custom-set-faces
+;; '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
+;; '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
+;;(set-face-attribute 'mode-line nil
+;;                    :background "#bdbdbd")
+;;(setq powerline-default-separator-dir '(left . right))
+
+(global-set-key (kbd "C-s-m") 'shrink-window-horizontally)
+(global-set-key (kbd "C-s-c") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-s-.") 'shrink-window)
+(global-set-key (kbd "C-s-q") 'enlarge-window)
 
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
