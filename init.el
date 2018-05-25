@@ -64,7 +64,6 @@
 (require 'init-recentf)
 (require 'init-smex)
 (require 'init-ivy)
-;;(require 'init-helm)
 (require 'init-hippie-expand)
 (require 'init-company)
 (require 'init-windows)
@@ -82,8 +81,10 @@
 
 (require 'init-projectile)
 
+(require 'magit)
+(require 'company)
+
 (require 'init-compile)
-;;(require 'init-crontab)
 (require 'init-textile)
 (require 'init-markdown)
 (require 'init-csv)
@@ -178,6 +179,9 @@
 ;; Set line numbers
 (global-linum-mode t)
 
+;; Set company globally
+(global-company-mode t)
+
 (custom-set-variables
  '(c-default-style
    (quote
@@ -188,22 +192,27 @@
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(smie-indent-basic 2)
- '(org-agenda-files (quote ("~/todo.org")))
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)")))))
+ '(js-indent-level 4)
+ '(org-todo-keywords (quote
+                      ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)")))))
 
 ;; re-map backward-kill-word
 (global-set-key (kbd "C-q") 'backward-kill-word)
 
-;;todo
+;; Set spellcheck
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; Set NeoTree window width
+(setq neo-window-width 33)
+
 ;; custom welcoming screen
 
-;; duck duck go fix
+;; Org agenda setup
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files (list "~/org"))
 
-;; org agenda
-
-;; emai
+;; email
 
 ;; slack
 
@@ -242,28 +251,12 @@
         (evil   . (telephone-line-airline-position-segment))))
 (telephone-line-mode 1)
 
-;;(add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
-;;(require 'powerline)
-;;(require 'cl)
-;;
-;;(powerline-default-theme)
-;;(setq powerline-arrow-shape 'arrow)
-;;
-;;;;(custom-set-faces
-;;;; '(mode-line ((t (:foreground "#0c91b4" :background "#d5d4d5" :box nil))))
-;;;; '(mode-line-inactive ((t (:foreground "#96a2a9" :background "#030514" :box nil)))))
-;;
-;;(custom-set-faces
-;; '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
-;; '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
-;;(set-face-attribute 'mode-line nil
-;;                    :background "#bdbdbd")
-;;(setq powerline-default-separator-dir '(left . right))
-
 (global-set-key (kbd "C-s-m") 'shrink-window-horizontally)
 (global-set-key (kbd "C-s-c") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-s-.") 'shrink-window)
 (global-set-key (kbd "C-s-q") 'enlarge-window)
+
+(global-set-key (kbd "C-s-g") 'balance-windows-area)
 
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
