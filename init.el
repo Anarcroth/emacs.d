@@ -210,11 +210,37 @@
 
 ;; Org agenda setup
 (global-set-key (kbd "C-c a") 'org-agenda)
+
 (setq org-agenda-files (list "~/org"))
+
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+
+;;open agenda in current window
+(setq org-agenda-window-setup (quote current-window))
+
+;;capture todo items using C-c c t
+(define-key global-map (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
+         "* TODO [#A] %?")
+        ("p" "personal" entry (file+headline "~/org/todo.org" "Personal")
+         "* TODO [#A] %?")
+        ("w" "work" entry (file+headline "~/org/todo.org" "Work")
+         "* TODO [#A] %?")
+        ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
+         "* TODO [#A] %?")))
 
 ;; email
 
 ;; slack
+
+(set-face-attribute 'default nil :height 140)
 
 (setq winum-keymap
       (let ((map (make-sparse-keymap)))
