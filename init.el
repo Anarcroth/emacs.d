@@ -162,6 +162,16 @@
 ;; Load Xresources colors
 (load-theme 'xresources t)
 
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "ProggyCleanTTSZ Nerd Font:antialias=0"
+                    :height 120
+                    :weight 'normal
+                    :width 'normal)
+
+;; Set cursor type
+(setq cursor-type 'bar)
+
 ;; Set transperancy in emacs
 (defun toggle-transparency ()
   (interactive)
@@ -173,7 +183,7 @@
                     ;; Also handle undocumented (<active> <inactive>) form.
                     ((numberp (cadr alpha)) (cadr alpha)))
               100)
-         '(80 . 50) '(100 . 100)))))
+         '(90 . 50) '(100 . 100)))))
 (global-set-key (kbd "C-c t") 'toggle-transparency)
 
 ;; Set line numbers
