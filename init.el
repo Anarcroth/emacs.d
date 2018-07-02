@@ -159,7 +159,12 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;;------------------------+
+;; Setup view environment |
+;;------------------------+
+
 ;; Load Xresources colors
+(require 'xresources)
 (load-theme 'xresources t)
 
 ;; Set default font
@@ -170,7 +175,8 @@
                     :width 'normal)
 
 ;; Set cursor type
-(setq cursor-type 'bar)
+(setq sentence-end-double-space nil)
+(setq-default cursor-type '(bar . 2))
 
 ;; Set transperancy in emacs
 (defun toggle-transparency ()
@@ -189,69 +195,11 @@
 ;; Set line numbers
 (global-linum-mode t)
 
-;; Set company globally
-(global-company-mode t)
-
-(custom-set-variables
- '(c-default-style
-   (quote
-    ((other . "stroustrup")
-     (java-mode . "java")
-     (awk-mode . "awk")
-     (other . "gnu"))))
- '(sh-basic-offset 2)
- '(sh-indentation 2)
- '(smie-indent-basic 2)
- '(js-indent-level 4)
- '(org-todo-keywords (quote
-                      ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)")))))
-
-;; re-map backward-kill-word
-(global-set-key (kbd "C-q") 'backward-kill-word)
-
-;; Set spellcheck
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-;; Set NeoTree window width
+;; Set neotree window width
+(require 'neotree)
 (setq neo-window-width 33)
 
-;; custom welcoming screen
-
-;; Org agenda setup
-(global-set-key (kbd "C-c a") 'org-agenda)
-
-(setq org-agenda-files (list "~/org"))
-
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?C)
-(setq org-default-priority ?A)
-
-(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
-                           (?B . (:foreground "LightSteelBlue"))
-                           (?C . (:foreground "OliveDrab"))))
-
-;;open agenda in current window
-(setq org-agenda-window-setup (quote current-window))
-
-;;capture todo items using C-c c t
-(define-key global-map (kbd "C-c c") 'org-capture)
-(setq org-capture-templates
-      '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
-         "* TODO [#A] %?")
-        ("p" "personal" entry (file+headline "~/org/todo.org" "Personal")
-         "* TODO [#A] %?")
-        ("w" "work" entry (file+headline "~/org/todo.org" "Work")
-         "* TODO [#A] %?")
-        ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
-         "* TODO [#A] %?")))
-
-;; email
-
-;; slack
-
-(set-face-attribute 'default nil :height 140)
-
+;; Set window numbering
 (setq winum-keymap
       (let ((map (make-sparse-keymap)))
         (define-key map (kbd "C-`") 'winum-select-window-by-number)
@@ -271,9 +219,7 @@
 
 (global-visual-line-mode t)
 
-(setq sentence-end-double-space nil)
-(setq-default cursor-type '(bar . 2))
-
+;; Set telephone-line
 (require 'telephone-line)
 (setq telephone-line-lhs
       '(
@@ -287,12 +233,86 @@
         (evil   . (telephone-line-airline-position-segment))))
 (telephone-line-mode 1)
 
+;; Change window size
 (global-set-key (kbd "C-s-m") 'shrink-window-horizontally)
 (global-set-key (kbd "C-s-c") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-s-.") 'shrink-window)
 (global-set-key (kbd "C-s-q") 'enlarge-window)
-
 (global-set-key (kbd "C-s-g") 'balance-windows-area)
+
+;;-----------------------+
+;; Setup dev environment |
+;;-----------------------+
+
+;; Set company globally
+(global-company-mode t)
+
+;; Set coding styles and indents
+(custom-set-variables
+ '(c-default-style
+   (quote
+    ((other . "stroustrup")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
+ '(sh-basic-offset 2)
+ '(sh-indentation 2)
+ '(smie-indent-basic 2)
+ '(js-indent-level 4))
+
+;; Set spellcheck
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;;-------------------------+
+;; Setup general utilities |
+;;-------------------------+
+
+;; re-map backward-kill-word
+(global-set-key (kbd "C-q") 'backward-kill-word)
+
+;; custom welcoming screen
+
+;;------------------+
+;; Org agenda setup |
+;;------------------+
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+(setq org-agenda-files (list "~/org"))
+
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+
+(setq org-todo-keywords (quote
+                         ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)"))))
+
+;;Open agenda in current window
+(setq org-agenda-window-setup (quote current-window))
+
+;;Capture todo items using C-c c t
+(define-key global-map (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
+         "* TODO [#A] %?")
+        ("p" "personal" entry (file+headline "~/org/todo.org" "Personal")
+         "* TODO [#A] %?")
+        ("w" "work" entry (file+headline "~/org/todo.org" "Work")
+         "* TODO [#A] %?")
+        ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
+         "* TODO [#A] %?")))
+
+;; Expand org files globally
+(setq org-startup-folded nil)
+
+;; email
+
+;; slack
 
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
