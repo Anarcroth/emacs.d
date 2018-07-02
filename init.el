@@ -164,7 +164,6 @@
 ;;------------------------+
 
 ;; Load Xresources colors
-(require 'xresources)
 (load-theme 'xresources t)
 
 ;; Set default font
