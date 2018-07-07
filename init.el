@@ -289,7 +289,7 @@
                            (?C . (:foreground "OliveDrab"))))
 
 (setq org-todo-keywords (quote
-                         ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)"))))
+                         ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)" "CANCELED(d)"))))
 
 ;;Open agenda in current window
 (setq org-agenda-window-setup (quote current-window))
@@ -299,6 +299,8 @@
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
          "* TODO [#A] %?")
+        ("i" "idea" entry (file+headline "~/org/todo.org" "Ideas")
+         "* IDEA %?")
         ("p" "personal" entry (file+headline "~/org/todo.org" "Personal")
          "* TODO [#A] %?")
         ("w" "work" entry (file+headline "~/org/todo.org" "Work")
