@@ -284,12 +284,12 @@
 (setq org-lowest-priority ?C)
 (setq org-default-priority ?A)
 
-(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
-                           (?B . (:foreground "LightSteelBlue"))
-                           (?C . (:foreground "OliveDrab"))))
+(setq org-priority-faces '((?A . (:foreground "#D39276" :weight bold))
+                           (?B . (:foreground "#1164AF"))
+                           (?C . (:foreground "#525E6D"))))
 
 (setq org-todo-keywords (quote
-                         ((sequence "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "DONE(d)" "CANCELED(d)"))))
+                         ((sequence "TODO(t)" "IDEA(i)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELED(c)"))))
 
 ;;Open agenda in current window
 (setq org-agenda-window-setup (quote current-window))
@@ -301,8 +301,6 @@
          "* TODO [#A] %?")
         ("i" "idea" entry (file+headline "~/org/todo.org" "Ideas")
          "* IDEA %?")
-        ("p" "personal" entry (file+headline "~/org/todo.org" "Personal")
-         "* TODO [#A] %?")
         ("w" "work" entry (file+headline "~/org/todo.org" "Work")
          "* TODO [#A] %?")
         ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
