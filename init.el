@@ -267,8 +267,14 @@
 ;; Setup general utilities |
 ;;-------------------------+
 
-;; re-map backward-kill-word
+;; Delete trailing white spaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Re-map backward-kill-word
 (global-set-key (kbd "C-q") 'backward-kill-word)
+
+;; Set eshell key
+(global-set-key [f1] 'eshell)
 
 ;; custom welcoming screen
 
@@ -299,6 +305,8 @@
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
          "* TODO [#A] %?")
+        ("a" "appointment" entry (file+headline "~/org/todo.org" "Appointments")
+         "* APPOINTMENT [#B] %?")
         ("i" "idea" entry (file+headline "~/org/todo.org" "Ideas")
          "* IDEA %?")
         ("w" "work" entry (file+headline "~/org/todo.org" "Work")
