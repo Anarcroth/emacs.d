@@ -44,6 +44,9 @@
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
 
+(package-initialize)
+(elpy-enable)
+
 (require-package 'wgrep)
 (require-package 'diminish)
 (require-package 'scratch)
@@ -263,6 +266,10 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
+;; Set python interpreter environment
+(setq python-shell-interpreter "python"
+      python-shell-interpreter-args "-i")
+
 ;;-------------------------+
 ;; Setup general utilities |
 ;;-------------------------+
@@ -274,7 +281,10 @@
 (global-set-key (kbd "C-q") 'backward-kill-word)
 
 ;; Set eshell key
-(global-set-key [f1] 'eshell)
+(global-set-key [f1] 'term)
+
+;; Call todo list from register
+(set-register ?t '(file . "~/org/todo.org"))
 
 ;; custom welcoming screen
 
