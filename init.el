@@ -301,11 +301,12 @@
 (setq org-default-priority ?A)
 
 (setq org-priority-faces '((?A . (:foreground "#D39276" :weight bold))
-                           (?B . (:foreground "#1164AF"))
+                           (?B . (:foreground "#1164AF" :weight bold))
                            (?C . (:foreground "#525E6D"))))
 
-(setq org-todo-keywords (quote
-                         ((sequence "TODO(t)" "IDEA(i)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELED(c)"))))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "IN-PROGRESS(p)" "TESTING(e)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")
+        (sequence "IDEA(i)" "RE-THINK(t)" "LATER(l)" "|")))
 
 ;;Open agenda in current window
 (setq org-agenda-window-setup (quote current-window))
@@ -313,14 +314,12 @@
 ;;Capture todo items using C-c c t
 (define-key global-map (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
-      '(("t" "todo" entry (file+headline "~/org/todo.org" "Tasks")
+      '(("t" "todo" entry (file+headline "~/org/todo.org" "What kind of a day do I want to have?")
          "* TODO [#A] %?")
         ("a" "appointment" entry (file+headline "~/org/todo.org" "Appointments")
          "* APPOINTMENT [#B] %?")
         ("i" "idea" entry (file+headline "~/org/todo.org" "Ideas")
-         "* IDEA %?")
-        ("w" "work" entry (file+headline "~/org/todo.org" "Work")
-         "* TODO [#A] %?")
+         "* IDEA [#C] %?")
         ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
          "* TODO [#A] %?")))
 
