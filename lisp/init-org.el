@@ -9,7 +9,6 @@
 ;; Various preferences
 (setq org-log-done t
       org-edit-timestamp-down-means-later t
-      org-archive-mark-done nil
       org-hide-emphasis-markers t
       org-catch-invisible-edits 'show
       org-export-coding-system 'utf-8
@@ -90,6 +89,7 @@ typical word processor."
     (kill-local-variable 'truncate-lines)
     (kill-local-variable 'word-wrap)
     (kill-local-variable 'cursor-type)
+    (kill-local-variable 'blink-cursor-interval)
     (kill-local-variable 'show-trailing-whitespace)
     (kill-local-variable 'line-spacing)
     (kill-local-variable 'electric-pair-mode)
