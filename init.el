@@ -172,13 +172,11 @@
 
 ;; Set default font
 (add-to-list 'default-frame-alist
-             '(font . "DejaVu Sans Mono-11:antialias=1"))
-;; Alternative to set the font with additional attributes
-;;(set-face-attribute 'default nil
-;;                    :family "ProggyCleanTTSZ Nerd Font:antialias=0"
-;;                    :height 120
-;;                    :weight 'normal
-;;                    :width 'normal)
+             '(font . "DejaVu Sans Mono Nerd Font:antialias=1"))
+(set-face-attribute 'default nil
+                    :height 121
+                    :weight 'normal
+                    :width 'normal)
 
 ;; Set cursor type
 (setq sentence-end-double-space nil)
@@ -289,6 +287,14 @@
 
 ;; Call todo list from register
 (set-register ?t '(file . "~/org/todo.org"))
+
+;; Associate other types of files with js-mode
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+
+;; Add js2 mode
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq js2-highlight-level 3)
 
 ;; Custom welcoming screen
 (setq initial-scratch-message
