@@ -341,7 +341,7 @@
          "* TODO [#A] %?")
         ("a" "appointment" entry (file+headline "~/org/todo.org" "Appointments")
          "* APPOINTMENT [#B] %?")
-        ("i" "idea" entry (file+headline "~/org/todo.org" "Ideas")
+        ("i" "idea" entry (file+headline "~/org/ideas.org" "Ideas")
          "* IDEA [#C] %?")
         ("u" "uni" entry (file+headline "~/org/todo.org" "Uni")
          "* TODO [#A] %?")))
