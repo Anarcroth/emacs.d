@@ -168,7 +168,9 @@
 ;;-----------------------+
 
 ;; Load Xresources colors
-(load-theme 'xresources t)
+;;(load-theme 'xresources t)
+;; Load monokai theme (found in lisp dir)
+(require 'color-theme-monokai)
 
 ;; Set default font
 (add-to-list 'default-frame-alist
