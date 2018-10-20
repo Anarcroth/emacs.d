@@ -170,7 +170,8 @@
 ;; Load Xresources colors
 ;;(load-theme 'xresources t)
 ;; Load monokai theme (found in lisp dir)
-(require 'color-theme-monokai)
+;;(require 'color-theme-monokai)
+(load-theme 'atom-one-dark t)
 
 ;; Set default font
 (add-to-list 'default-frame-alist
@@ -299,15 +300,14 @@
 (setq js2-highlight-level 3)
 
 ;; Custom welcoming screen
-(setq initial-scratch-message
-      "
+(setq initial-scratch-message "
 ;;███████╗███╗   ███╗ █████╗  ██████╗███████╗    ██████╗ ██╗     ███████╗
 ;;██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║     ╚══███╔╝
 ;;█████╗  ██╔████╔██║███████║██║     ███████╗    ██████╔╝██║       ███╔╝
 ;;██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║    ██╔══██╗██║      ███╔╝
 ;;███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║    ██║  ██║███████╗███████╗
 ;;╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
-      ")
+")
 
 ;; Setup org-reveal root
 (require 'ox-reveal)
