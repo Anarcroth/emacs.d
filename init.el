@@ -167,10 +167,7 @@
 ;; Setup how emacs looks |
 ;;-----------------------+
 
-;; Load Xresources colors
-;;(load-theme 'xresources t)
-;; Load monokai theme (found in lisp dir)
-;;(require 'color-theme-monokai)
+;; Load atom one dark theme
 (load-theme 'atom-one-dark t)
 
 ;; Set default font
@@ -312,6 +309,11 @@
 ;; Setup org-reveal root
 (require 'ox-reveal)
 (setq org-reveal-root "file:///home/anarcroth/reveal.js")
+
+;; Add manually mode-icons mode
+(add-to-list 'load-path "~/.emacs.d/mode-icons/")
+(require 'mode-icons)
+(mode-icons-mode)
 
 ;;------------------+
 ;; Org agenda setup |
