@@ -297,6 +297,12 @@
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 (setq js2-highlight-level 3)
 
+;; Setup custom word wrappings
+(wrap-region-mode t)
+(wrap-region-add-wrapper "`" "`" nil 'markdown-mode)
+(wrap-region-add-wrapper "~" "~" nil 'markdown-mode)
+(wrap-region-add-wrapper "*" "*" nil 'markdown-mode)
+
 ;; Custom welcoming screen
 (setq initial-scratch-message "
 ;;███████╗███╗   ███╗ █████╗  ██████╗███████╗    ██████╗ ██╗     ███████╗
