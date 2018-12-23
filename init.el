@@ -224,16 +224,19 @@
 
 (global-visual-line-mode t)
 
+(nyan-mode t)
+(nyan-toggle-wavy-trail)
+
 ;; Set telephone-line
 (require 'telephone-line)
 (setq telephone-line-lhs
-      '(
-        (accent . (telephone-line-vc-segment
+      '((accent . (telephone-line-vc-segment
                    telephone-line-erc-modified-channels-segment
                    telephone-line-process-segment))
         (nil    . (telephone-line-buffer-segment))))
 (setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
+      '((nil    . (telephone-line-misc-info-segment
+                   telephone-line-nyan-segment))
         (accent . (telephone-line-major-mode-segment))
         (evil   . (telephone-line-airline-position-segment))))
 (telephone-line-mode 1)
@@ -248,6 +251,12 @@
 ;;-----------------------+
 ;; Setup dev environment |
 ;;-----------------------+
+
+;; Bracket complete mode - electric pairs
+(electric-pair-mode 1)
+(setq electric-pair-pairs
+      '(
+        (?\` . ?\`)))
 
 ;; Vimlike code folding
 (vimish-fold-global-mode 1)
@@ -293,7 +302,7 @@
 (set-register ?t '(file . "~/org/todo.org"))
 
 ;; Associate other types of files with js-mode
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
 ;; Add js2 mode
 (add-hook 'js-mode-hook 'js2-minor-mode)
