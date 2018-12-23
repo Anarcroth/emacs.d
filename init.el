@@ -249,6 +249,9 @@
 ;; Setup dev environment |
 ;;-----------------------+
 
+;; Vimlike code folding
+(vimish-fold-global-mode 1)
+
 ;; Set company globally
 (global-company-mode t)
 
@@ -298,7 +301,7 @@
 (setq js2-highlight-level 3)
 
 ;; Setup custom word wrappings
-(wrap-region-mode t)
+(wrap-region-global-mode t)
 (wrap-region-add-wrapper "`" "`" nil 'markdown-mode)
 (wrap-region-add-wrapper "~" "~" nil 'markdown-mode)
 (wrap-region-add-wrapper "*" "*" nil 'markdown-mode)
@@ -316,11 +319,6 @@
 ;; Setup org-reveal root
 (require 'ox-reveal)
 (setq org-reveal-root "file:///home/anarcroth/reveal.js")
-
-;; Add manually mode-icons mode
-(add-to-list 'load-path "~/.emacs.d/mode-icons/")
-(require 'mode-icons)
-(mode-icons-mode)
 
 ;;------------------+
 ;; Org agenda setup |
