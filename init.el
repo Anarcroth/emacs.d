@@ -224,21 +224,42 @@
 
 (global-visual-line-mode t)
 
+;; Start nyan-cat mode...
 (nyan-mode t)
 (nyan-toggle-wavy-trail)
+(setq nyan-bar-length 18)
 
 ;; Set telephone-line
 (require 'telephone-line)
+(setq telephone-line-primary-left-separator 'telephone-line-abs-left
+      telephone-line-primary-right-separator 'telephone-line-abs-right)
+(defface atom-red '((t (:foreground "#E06C75" :weight bold :background "#121417"))) "")
+(defface atom-orange '((t (:foreground "#D19A66" :weight bold :background "#282C34"))) "")
+(defface atom-green '((t (:foreground "#98C379" :weight bold :background "#282C34"))) "")
+(defface atom-cyan '((t (:foreground "#56B6C2" :weight bold :background "#3E4451"))) "")
+(defface atom-blue '((t (:foreground "#61AFEF" :weight bold :background "#3E4451"))) "")
+(defface atom-purple '((t (:foreground "#C678DD" :weight bold :background "#282C34"))) "")
+(setq telephone-line-faces
+      '((red    . (atom-red . atom-red))
+        (orange . (atom-orange . atom-orange))
+        (green  . (atom-green . atom-green))
+        (cyan   . (atom-cyan . atom-cyan))
+        (blue   . (atom-blue . atom-blue))
+        (purple . (atom-purple . atom-purple))
+        (accent . (telephone-line-accent-inactive . telephone-line-accent-inactive))
+        (nil    . (mode-line . mode-line-inactive))))
 (setq telephone-line-lhs
-      '((accent . (telephone-line-vc-segment
+      '((red    . (telephone-line-window-number-segment))
+        (green  . (telephone-line-vc-segment
                    telephone-line-erc-modified-channels-segment
                    telephone-line-process-segment))
-        (nil    . (telephone-line-buffer-segment))))
+        (blue   . (telephone-line-buffer-segment))
+        (nil    . (telephone-line-nyan-segment))))
 (setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment
-                   telephone-line-nyan-segment))
-        (accent . (telephone-line-major-mode-segment))
-        (evil   . (telephone-line-airline-position-segment))))
+      '((nil    . (telephone-line-misc-info-segment))
+        (orange . (telephone-line-atom-encoding-segment))
+        (cyan   . (telephone-line-major-mode-segment))
+        (purple . (telephone-line-airline-position-segment))))
 (telephone-line-mode 1)
 
 ;; Change window size
@@ -255,8 +276,7 @@
 ;; Bracket complete mode - electric pairs
 (electric-pair-mode 1)
 (setq electric-pair-pairs
-      '(
-        (?\` . ?\`)))
+      '((?\` . ?\`)))
 
 ;; Vimlike code folding
 (vimish-fold-global-mode 1)
