@@ -183,6 +183,9 @@
 (setq sentence-end-double-space nil)
 (setq-default cursor-type '(bar . 2))
 
+;; Set line highlighting
+(global-hl-line-mode 1)
+
 ;; Set transperancy in emacs
 (defun toggle-transparency ()
   (interactive)
@@ -233,12 +236,12 @@
 (require 'telephone-line)
 (setq telephone-line-primary-left-separator 'telephone-line-abs-left
       telephone-line-primary-right-separator 'telephone-line-abs-right)
-(defface atom-red '((t (:foreground "#E06C75" :weight bold :background "#121417"))) "")
-(defface atom-orange '((t (:foreground "#D19A66" :weight bold :background "#282C34"))) "")
+(defface atom-red '((t (:foreground "#E06C75" :weight bold :background "#3E4451"))) "")
+(defface atom-orange '((t (:foreground "#D19A66" :weight bold :background "#3E4451"))) "")
 (defface atom-green '((t (:foreground "#98C379" :weight bold :background "#282C34"))) "")
-(defface atom-cyan '((t (:foreground "#56B6C2" :weight bold :background "#3E4451"))) "")
+(defface atom-cyan '((t (:foreground "#56B6C2" :weight bold :background "#282C34"))) "")
 (defface atom-blue '((t (:foreground "#61AFEF" :weight bold :background "#3E4451"))) "")
-(defface atom-purple '((t (:foreground "#C678DD" :weight bold :background "#282C34"))) "")
+(defface atom-purple '((t (:foreground "#C678DD" :weight bold :background "#3E4451"))) "")
 (setq telephone-line-faces
       '((red    . (atom-red . atom-red))
         (orange . (atom-orange . atom-orange))
@@ -304,6 +307,17 @@
 ;; Set python interpreter environment
 (setq python-shell-interpreter "python"
       python-shell-interpreter-args "-i")
+
+;; LaTeX and AUCtex setup
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+(setq TeX-PDF-mode t)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
 
 ;;-------------------------+
 ;; Setup general utilities |
