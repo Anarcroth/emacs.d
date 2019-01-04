@@ -327,7 +327,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Re-map backward-kill-word
-(global-set-key (kbd "C-q") 'backward-kill-word)
+;;(global-set-key (kbd "C-q") 'backward-kill-word)
 
 ;; Set eshell key
 (global-set-key [f1] 'eshell)
@@ -362,6 +362,42 @@
 ;; Setup org-reveal root
 (require 'ox-reveal)
 (setq org-reveal-root "file:///home/anarcroth/reveal.js")
+
+;; Move lines up and down
+(defun move-line (n)
+  "Move the current line up or down by N lines."
+  (interactive "p")
+  (setq col (current-column))
+  (beginning-of-line) (setq start (point))
+  (end-of-line) (forward-char) (setq end (point))
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (insert line-text)
+    ;; restore point to original column in moved line
+    (forward-line -1)
+    (forward-char col)))
+
+(defun move-line-up (n)
+  "Move the current line up by N lines."
+  (interactive "p")
+  (move-line (if (null n) -1 (- n))))
+
+(defun move-line-down (n)
+  "Move the current line down by N lines."
+  (interactive "p")
+  (move-line (if (null n) 1 n)))
+
+(global-set-key (kbd "C-s-<up>") 'move-line-up)
+(global-set-key (kbd "C-s-<down>") 'move-line-down)
+
+;; Dvorak keys mapping
+(global-set-key (kbd "C-z") ctl-x-map)
+(global-set-key (kbd "C-x C-h") help-map)
+(global-set-key (kbd "C-h") 'backward-kill-word)
+(global-set-key (kbd "C-t") 'previous-line)
+(global-set-key [?\C-.] 'execute-extended-command)
+(global-set-key [?\C-,] (lookup-key global-map [?\C-x]))
+(global-set-key [?\C-'] 'hippie-expand)
 
 ;;------------------+
 ;; Org agenda setup |
